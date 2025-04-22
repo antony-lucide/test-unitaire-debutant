@@ -37,7 +37,7 @@ Il s’agit du premier niveau de test dans le cycle de développement logiciel, 
 
 Utilisez un gestionnaire de paquets comme npm pour installer les outils de test (ex : Jest).
 
-![npm install](./image/npm.png)
+![npm install](./Image/npm.png)
 
 
 ---
@@ -55,7 +55,7 @@ Respectez le modèle Arrange/Act/Assert pour structurer vos tests :
 
 ### 3. Lancer les tests avec Jest
 
-![jest run](./image/jest.png)
+![jest run](./Image/jest.png)
 
 
 ---
@@ -64,11 +64,11 @@ Respectez le modèle Arrange/Act/Assert pour structurer vos tests :
 
 #### Succès : tous les tests passent
 
-![tests réussis](./image/pass.png)
+![tests réussis](./Image/pass.png)
 
 #### Échec : un ou plusieurs tests échouent
 
-![tests échoués](./image/failed.png)
+![tests échoués](./Image/failed.png)
 
 Corrigez le code jusqu’à ce que tous les tests passent.
 
@@ -90,13 +90,13 @@ Cela permet à Jest d’ignorer les fichiers image lors des tests.
 ## Résumé visuel du workflow
 
 1. Installation des dépendances  
-   ![npm install](./image/npm.png)
+   ![npm install](./Image/npm.png)
 2. Lancement des tests  
-   ![jest run](./image/jest.png)
+   ![jest run](./Image/jest.png)
 3. Succès  
-   ![tests réussis](./image/pass.png)
+   ![tests réussis](./Image/pass.png)
 4. Échec  
-   ![tests échoués](./image/failed.png)
+   ![tests échoués](./Image/failed.png)
 
 ---
 
