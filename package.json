@@ -1,0 +1,26 @@
+{
+  "name": "test-unitaire-debutant",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "test unitaire",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antony-lucide/test-unitaire-debutant.git"
+  },
+  "keywords": [
+    "unitaire"
+  ],
+  "author": "antony",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/antony-lucide/test-unitaire-debutant/issues"
+  },
+  "homepage": "https://github.com/antony-lucide/test-unitaire-debutant#readme",
+  "dependencies": {
+    "jest": "^29.7.0"
+  }
+}
