@@ -1,20 +1,24 @@
 <?php
+
 class Calculator {
-public function calculate($expression) {
-$expression = str_replace(['×', '÷', '−', '–', '—'], ['*', '/', '-', '-', '-'], $expression);
-$expression = trim($expression);
+    public function calculate($expression) {
+        $expression = str_replace(['×', '÷', '−', '–', '—'], ['*', '/', '-', '-', '-'], $expression);
+        $expression = trim($expression);
 
-try {
-    $result = eval("return $expression;");
-    } catch (Throwable $e) {
-    throw new RuntimeException("Erreur de calcul");
+        if ($expression === '') {
+            throw new \RuntimeException("Expression vide");
+        }
+
+        try {
+            $result = eval("return $expression;");
+        } catch (\Throwable $e) {
+            throw new \RuntimeException("Erreur de calcul");
+        }
+
+        if ($result === false) {
+            throw new \RuntimeException("Erreur de calcul");
+        }
+
+        return $result;
     }
-
-    if ($result === false) {
-    throw new RuntimeException("Erreur de calcul");
-    }
-
-return $result;
 }
-}
-?>

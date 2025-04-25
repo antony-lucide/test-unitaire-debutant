@@ -1,9 +1,16 @@
 {
-  "type": "module",
-  "dependencies": {
-    "jest": "^29.7.0"
-  },
+  "name": "job-03",
+  "version": "1.0.0",
+  "description": "Tests unitaires pour calculettes PHP & JS - Job 03",
+  "main": "src/calculator.js",
   "scripts": {
-    "test": "jest"
-  }
+      "test": "jest"
+  },
+  "keywords": [],
+  "author": "Elyes",
+  "license": "ISC",
+  "devDependencies": {
+      "jest": "^29.7.0"
+  },
+  "type": "commonjs"
 }

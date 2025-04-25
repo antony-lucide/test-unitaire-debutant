@@ -1,45 +1,45 @@
 <?php
-// tests/CalculatorTest.php
 
 use PHPUnit\Framework\TestCase;
-require_once __DIR__ . '/../calculator.php'; 
+
+require_once __DIR__ . '/../src/calculator.php';
 
 class CalculatorTest extends TestCase {
-
-    private $calculator;
-
-    protected function setUp(): void {
-        // Initialiser l'objet Calculator avant chaque test
-        $this->calculator = new Calculator();
-    }
-
     public function testAddition() {
-        $result = $this->calculator->calculate('2+3');
-        $this->assertEquals(5, $result);
+        $calc = new Calculator();
+        $this->assertEquals(5, $calc->calculate("2+3"));
     }
 
-    public function testSubtraction() {
-        $result = $this->calculator->calculate('5-3');
-        $this->assertEquals(2, $result);
+    public function testSoustraction() {
+        $calc = new Calculator();
+        $this->assertEquals(6, $calc->calculate("10-4"));
     }
 
     public function testMultiplication() {
-        $result = $this->calculator->calculate('4*3');
-        $this->assertEquals(12, $result);
+        $calc = new Calculator();
+        $this->assertEquals(12, $calc->calculate("3*4"));
     }
 
     public function testDivision() {
-        $result = $this->calculator->calculate('10/2');
-        $this->assertEquals(5, $result);
+        $calc = new Calculator();
+        $this->assertEquals(4, $calc->calculate("8/2"));
     }
 
-    public function testDivisionByZero() {
+    public function testDivisionParZero() {
         $this->expectException(RuntimeException::class);
-        $this->calculator->calculate('10/0');
+        $calc = new Calculator();
+        $calc->calculate("10/0");
     }
 
-    public function testEmptyString() {
-        $result = $this->calculator->calculate('');
-        $this->assertEquals(0, $result);  // Si la chaîne est vide, on retourne 0
+    public function testExpressionInvalide() {
+        $this->expectException(RuntimeException::class);
+        $calc = new Calculator();
+        $calc->calculate("2+bad");
+    }
+
+    public function testChaineVide() {
+        $this->expectException(RuntimeException::class);
+        $calc = new Calculator();
+        $calc->calculate("");
     }
 }

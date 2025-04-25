@@ -1,77 +1,35 @@
-// tests/calculator.test.js
-import { clearResult, appendValue, appendOperator, calculate } from '../src/Calculator.js';
+const { calculate } = require('../src/calculator');
 
-describe('Calculatrice', () => {
-    beforeEach(() => {
-      // Reset la calculatrice avant chaque test si nécessaire
-      clearResult();
-    });
-  
-    test('Addition', () => {
-      appendValue('2');
-      appendOperator('+');
-      appendValue('3');
-      calculate();
-      expect(document.getElementById('result').value).toBe('5');
-    });
-  
-    test('Soustraction', () => {
-      appendValue('5');
-      appendOperator('-');
-      appendValue('3');
-      calculate();
-      expect(document.getElementById('result').value).toBe('2');
-    });
-  
-    test('Multiplication', () => {
-      appendValue('4');
-      appendOperator('*');
-      appendValue('3');
-      calculate();
-      expect(document.getElementById('result').value).toBe('12');
-    });
-  
-    test('Division', () => {
-      appendValue('10');
-      appendOperator('/');
-      appendValue('2');
-      calculate();
-      expect(document.getElementById('result').value).toBe('5');
-    });
-  
-    test('Priorités d\'opérations', () => {
-      appendValue('2');
-      appendOperator('+');
-      appendValue('3');
-      appendOperator('*');
-      appendValue('4');
-      calculate();
-      expect(document.getElementById('result').value).toBe('14');  // 2 + (3*4) = 14
-    });
-  
-    test('Parenthèses', () => {
-      appendValue('(');
-      appendValue('2');
-      appendOperator('+');
-      appendValue('3');
-      append(')');
-      appendOperator('*');
-      appendValue('4');
-      calculate();
-      expect(document.getElementById('result').value).toBe('20');  // (2+3)*4 = 20
-    });
-  
-    test('Expression invalide', () => {
-      appendValue('2');
-      appendOperator('+');
-      appendValue('bad');
-      calculate();
-      expect(document.getElementById('result').value).toBe('Erreur');
-    });
-  
-    test('Chaîne vide', () => {
-      calculate();
-      expect(document.getElementById('result').value).toBe('0');
-    });
+describe('Fonction calculate()', () => {
+  test('addition', () => {
+    expect(calculate("2+3")).toBe(5);
   });
-  
+
+  test('soustraction', () => {
+    expect(calculate("10-4")).toBe(6);
+  });
+
+  test('multiplication', () => {
+    expect(calculate("3*4")).toBe(12);
+  });
+
+  test('division', () => {
+    expect(calculate("8/2")).toBe(4);
+  });
+
+  test('priorité opérateurs (2+3*4)', () => {
+    expect(calculate("2+3*4")).toBe(14);
+  });
+
+  test('parenthèses ((2+3)*4)', () => {
+    expect(calculate("(2+3)*4")).toBe(20);
+  });
+
+  test('expression invalide (2+bad)', () => {
+    expect(() => calculate("2+bad")).toThrow("Expression invalide");
+  });
+
+  test('chaîne vide', () => {
+    expect(() => calculate("")).toThrow("Expression invalide");
+  });
+});

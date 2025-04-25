@@ -1,43 +1,55 @@
 <?php
 require_once 'calculator.php';
+
 session_start();
 
-if (!isset($_SESSION['expression'])) $_SESSION['expression'] = '';
-if (!isset($_SESSION['history'])) $_SESSION['history'] = [];
-if (!isset($_SESSION['raw'])) $_SESSION['raw'] = '';
+// Initialize session variables if not already set
+if (!isset($_SESSION['expression'])) {
+    $_SESSION['expression'] = '';
+}
+if (!isset($_SESSION['history'])) {
+    $_SESSION['history'] = [];
+}
+if (!isset($_SESSION['raw'])) {
+    $_SESSION['raw'] = '';
+}
 
 $result = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $btn = $_POST['btn'];
 
-    // Reset display if trying to continue after "="
-    if (strpos($_SESSION['expression'], '=') !== false && !in_array($btn, ['=', 'C', 'CE'])) {
+    // Reset display if attempting to continue after '='
+    if (strpos($_SESSION['expression'], '=') !== false && !in_array($btn, ['=', 'C', 'CE'], true)) {
         $_SESSION['expression'] = '';
     }
 
     if ($btn === 'C') {
+        // Clear current expression
         $_SESSION['expression'] = '';
         $_SESSION['raw'] = '';
     } elseif ($btn === 'CE') {
+        // Clear history
         $_SESSION['history'] = [];
     } elseif ($btn === '=') {
         $calculator = new Calculator();
-
         try {
+            // Calculate result
             $result = $calculator->calculate($_SESSION['raw']);
             $entry = $_SESSION['raw'] . ' = ' . $result;
             $_SESSION['expression'] = $entry;
-            $_SESSION['raw'] = (string)$result;
+            $_SESSION['raw'] = (string)$result; // Store result for continued calculations
             $_SESSION['history'][] = $entry;
         } catch (Exception $e) {
+            // Handle calculation errors
             $entry = $_SESSION['raw'] . ' = ' . $e->getMessage();
             $_SESSION['expression'] = $entry;
             $_SESSION['raw'] = '';
             $_SESSION['history'][] = $entry;
         }
     } else {
-        if ($_SESSION['raw'] === '' && in_array($btn, ['+', '-', '*', '/'])) {
+        // Build expression
+        if ($_SESSION['raw'] === '' && in_array($btn, ['+', '-', '*', '/'], true)) {
             $_SESSION['expression'] .= '0' . $btn;
             $_SESSION['raw'] .= '0' . $btn;
         } else {
@@ -47,17 +59,70 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
+    <meta charset="UTF-8">
     <title>Calculette Graphique PHP avec Historique</title>
     <style>
-        body { font-family: Arial; display: flex; justify-content: center; margin-top: 30px; }
-        .calculator { border: 1px solid #333; padding: 20px; border-radius: 10px; background: #f4f4f4; }
-        .display { height: 40px; text-align: right; padding: 10px; font-size: 20px; background: #fff; border: 1px solid #ccc; margin-bottom: 10px; width: 220px; }
-        .buttons form { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-        button { padding: 15px; font-size: 18px; cursor: pointer; }
-        .history { margin-top: 20px; font-size: 14px; background: #fff; padding: 10px; border: 1px solid #ccc; height: 100px; overflow-y: auto; }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            background-color: #f0f0f0;
+        }
+
+        .calculator {
+            border: 1px solid #333;
+            padding: 20px;
+            border-radius: 10px;
+            background: #f4f4f4;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .display {
+            height: 40px;
+            text-align: right;
+            padding: 10px;
+            font-size: 20px;
+            background: #fff;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            width: 220px;
+            box-sizing: border-box; /* Ensures padding doesn't affect width */
+        }
+
+        .buttons form {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        button {
+            padding: 15px;
+            font-size: 18px;
+            cursor: pointer;
+            border: 1px solid #bbb;
+            border-radius: 5px;
+            background-color: #eee;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #ddd;
+        }
+
+        .history {
+            margin-top: 20px;
+            font-size: 14px;
+            background: #fff;
+            padding: 10px;
+            border: 1px solid #ccc;
+            height: 100px;
+            overflow-y: auto;
+        }
     </style>
 </head>
 <body>
@@ -72,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             '0', '.', 'C', '+',
                             '(', ')', '=', 'CE'];
                 foreach ($buttons as $b) {
-                    echo '<button type="submit" name="btn" value="' . $b . '">' . $b . '</button>';
+                    echo '<button type="submit" name="btn" value="' . htmlspecialchars($b) . '">' . htmlspecialchars($b) . '</button>';
                 }
                 ?>
             </form>
@@ -117,3 +182,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </script>
 </body>
 </html>
+

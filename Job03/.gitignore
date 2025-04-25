@@ -1,41 +1,17 @@
-# Node.js
+
+# Job-03: Mixte (JS + PHP + Images)
 node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+vendor/
 package-lock.json
-.pnpm-debug.log
-
-# PHP Composer
-/vendor/
-/composer.lock
-
-# Environment & config
+composer.lock
+coverage/
 .env
-.env.*.local
-.phpunit.result.cache
-
-# Logs
-*.log
-
-# OS-specific
 .DS_Store
-Thumbs.db
-
-# IDE/editor config
-.vscode/
-.idea/
-*.sublime-project
-*.sublime-workspace
-
-# Build / Cache
-/dist/
-/build/
-/.cache/
-/coverage/
-
-# Misc
-*.tgz
+*.log
 *.zip
+*.rar
+*.tar.gz
 *.bak
 *.tmp
+images/*.psd
+images/*.xcf
