@@ -1,0 +1,41 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+.pnpm-debug.log
+
+# PHP Composer
+/vendor/
+/composer.lock
+
+# Environment & config
+.env
+.env.*.local
+.phpunit.result.cache
+
+# Logs
+*.log
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# IDE/editor config
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Build / Cache
+/dist/
+/build/
+/.cache/
+/coverage/
+
+# Misc
+*.tgz
+*.zip
+*.bak
+*.tmp
